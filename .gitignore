@@ -1,1 +1,9 @@
-node_modules/\ndist/\n.venv/\n__pycache__/\n*.py[cod]\n.env\nbackend/construction.db\nbackend/uploads/*\n!backend/uploads/.gitkeep\n
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.py[cod]
+.env
+backend/construction.db
+backend/uploads/*
+!backend/uploads/.gitkeep
