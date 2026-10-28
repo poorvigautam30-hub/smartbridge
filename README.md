@@ -40,15 +40,13 @@ Open http://localhost:5173.
 ### Optional Gemini
 Add `GEMINI_API_KEY=your_key` to `backend/.env` and restart the backend. The key is never needed to run the demo. Never commit API keys.
 
-## Deploy on Streamlit Community Cloud
+## Deploy with the original React UI
 
-This repository includes `streamlit_app.py`, a Streamlit version of the core workflows that runs without a separately hosted API. Push the repository to GitHub, then create an app at <https://share.streamlit.io> using this repository, your deployment branch, and `streamlit_app.py` as the entrypoint. The root `requirements.txt` supplies the app dependencies.
+The Docker service builds the existing React/Vite frontend and serves it from FastAPI, so the page and `/api` endpoints share one origin. To deploy on Render:
 
-Optional Gemini integration: in the app's Streamlit Community Cloud settings, add this under **Secrets**:
+1. Push this repository to GitHub.
+2. In Render, choose **New > Blueprint** and select the repository. Render reads `render.yaml` and builds the root `Dockerfile`.
+3. Optionally set `GEMINI_API_KEY` in the service environment. Without it, the app runs in demo mode.
+4. Wait for the deploy health check at `/api/health` to pass, then open the Render URL.
 
-```toml
-GEMINI_API_KEY = "your-key"
-```
-
-Without a key, the app runs in demo mode. Never commit secrets. Report history uses local SQLite storage and may be reset on hosted deployments. Uploaded images are processed in the session and are not retained in report history.
-
+You can also create a Render **Web Service** manually, select **Docker**, and use `./Dockerfile`. The frontend is the same React UI used locally. On plans with an ephemeral filesystem, local SQLite history and uploaded files can be lost when the service restarts or is redeployed; use persistent storage if that data must survive.

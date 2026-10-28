@@ -99,3 +99,8 @@ def daily(req: DailyRequest):
     prompt=f"Answer construction site question safely: {req.model_dump()}. Return JSON keys headline, answer, checklist array, weather_advice, follow_up, limitations. Do not claim live weather access."
     result,mode=generate_json(prompt,fallback); result.update({"mode":mode,"inputs":req.model_dump()})
     return save_analysis("daily_assistance","Daily site assistance",result["headline"],result)
+
+# Serve the production React build from the same origin as the API.
+from .config import FRONTEND_DIST_DIR
+if os.path.isdir(FRONTEND_DIST_DIR):
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST_DIR, html=True), name="frontend")
