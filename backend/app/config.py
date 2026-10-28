@@ -9,5 +9,3 @@ UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
 DB_PATH = os.path.join(BASE_DIR, "construction.db")
 MAX_UPLOAD_BYTES = 8 * 1024 * 1024
 ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp"}
-FRONTEND_DIST_DIR = os.getenv("FRONTEND_DIST_DIR", os.path.abspath(os.path.join(BASE_DIR, "..", "frontend", "dist")))
-

@@ -40,13 +40,12 @@ Open http://localhost:5173.
 ### Optional Gemini
 Add `GEMINI_API_KEY=your_key` to `backend/.env` and restart the backend. The key is never needed to run the demo. Never commit API keys.
 
-## Deploy with the original React UI
+## Deploy on Streamlit Community Cloud
 
-The Docker service builds the existing React/Vite frontend and serves it from FastAPI, so the page and `/api` endpoints share one origin. To deploy on Render:
+This repository includes `streamlit_app.py`, a Streamlit implementation of the BuildSense workflows. It runs the AI and database logic directly in the Streamlit app, so no separate backend host is required.
 
 1. Push this repository to GitHub.
-2. In Render, choose **New > Blueprint** and select the repository. Render reads `render.yaml` and builds the root `Dockerfile`.
-3. Optionally set `GEMINI_API_KEY` in the service environment. Without it, the app runs in demo mode.
-4. Wait for the deploy health check at `/api/health` to pass, then open the Render URL.
+2. In Streamlit Community Cloud, choose **Create app** and select repository `poorvigautam30-hub/smartbridge`, branch `main`, and entrypoint `streamlit_app.py`.
+3. Optionally add `GEMINI_API_KEY = "your-key"` under the app's **Secrets** settings. Without a key, the app runs in demo mode.
 
-You can also create a Render **Web Service** manually, select **Docker**, and use `./Dockerfile`. The frontend is the same React UI used locally. On plans with an ephemeral filesystem, local SQLite history and uploaded files can be lost when the service restarts or is redeployed; use persistent storage if that data must survive.
+The app is styled to follow the original BuildSense colors and layout. Streamlit uses its own widgets, so it is a Streamlit recreation rather than the original React page. Report history is stored in local SQLite and may reset on a hosted app restart.

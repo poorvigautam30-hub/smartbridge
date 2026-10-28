@@ -7,3 +7,4 @@ __pycache__/
 backend/construction.db
 backend/uploads/*
 !backend/uploads/.gitkeep
+.streamlit/secrets.toml

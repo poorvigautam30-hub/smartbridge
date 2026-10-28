@@ -1,9 +1,0 @@
-.git
-**/.venv
-**/node_modules
-**/dist
-**/__pycache__
-**/*.py[cod]
-**/.env
-backend/construction.db
-backend/uploads
