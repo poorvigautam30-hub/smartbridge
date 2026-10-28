@@ -1,4 +1,4 @@
-# Multimodal Construction Intelligence Platform
+﻿# Multimodal Construction Intelligence Platform
 
 Full-stack educational prototype inspired by your Skill Wallet brief.
 
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 # copy .env.example to .env (optional)
 uvicorn app.main:app --reload
 ```
-API: http://127.0.0.1:8000 — docs: http://127.0.0.1:8000/docs
+API: http://127.0.0.1:8000 â€” docs: http://127.0.0.1:8000/docs
 
 ### Frontend (terminal 2)
 ```bash
@@ -39,3 +39,16 @@ Open http://localhost:5173.
 
 ### Optional Gemini
 Add `GEMINI_API_KEY=your_key` to `backend/.env` and restart the backend. The key is never needed to run the demo. Never commit API keys.
+
+## Deploy on Streamlit Community Cloud
+
+This repository includes `streamlit_app.py`, a Streamlit version of the core workflows that runs without a separately hosted API. Push the repository to GitHub, then create an app at <https://share.streamlit.io> using this repository, your deployment branch, and `streamlit_app.py` as the entrypoint. The root `requirements.txt` supplies the app dependencies.
+
+Optional Gemini integration: in the app's Streamlit Community Cloud settings, add this under **Secrets**:
+
+```toml
+GEMINI_API_KEY = "your-key"
+```
+
+Without a key, the app runs in demo mode. Never commit secrets. Report history uses local SQLite storage and may be reset on hosted deployments. Uploaded images are processed in the session and are not retained in report history.
+
